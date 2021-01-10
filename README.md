@@ -1,7 +1,12 @@
 <h2 align="center">Pangaea PubSub</h2>
 
-### Technologies
+<p>
+  For this challenge I created an HTTP notification system. A server (or set of servers) will keep track of `topics -> subscribers` where a topic is a string and a subscriber is an HTTP endpoint.  When a message is published on a topic, it is forwarded to all subscriber endpoints.
 
+  I built this using Node.js, Express.js and Redis.
+</p>
+
+### Technologies
 * Node.js
 * Express.js
 * Redis
