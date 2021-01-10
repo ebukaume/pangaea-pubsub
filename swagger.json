@@ -1,0 +1,162 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Pangaea PubSub",
+    "description": "A simple REST-based publisher-subscriber system",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:4000/v1"
+    }
+  ],
+  "paths": {
+    "/subscribe/{topic}": {
+      "post": {
+        "parameters": {
+          "in": "path",
+          "name": "topic",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        },
+        "description": "Lets you subscribe a topic specified by the route param",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "url"
+                ],
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "example": "http://127.0.0.1:4000/v1/subscribe/updates"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully subscribed to topic",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "example": "http://127.0.0.1:4000/v1/subscribe/updates"
+                    },
+                    "topic": {
+                      "type": "string",
+                      "example": "updates"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Failure"
+                    },
+                    "error": {
+                      "type": "string",
+                      "example": "VALIDATION_ERROR"
+                    },
+                    "detail": {
+                      "type": "string",
+                      "example": "\"url\" is required"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/publish/{topic}": {
+      "post": {
+        "description": "Lets you publish a message to subscribers of a topic specified by the route param",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully published to topic subscribers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number",
+                      "example": "1"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Failure"
+                    },
+                    "error": {
+                      "type": "string",
+                      "example": "VALIDATION_ERROR"
+                    },
+                    "detail": {
+                      "type": "string",
+                      "example": "\"body\" must be of type object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
