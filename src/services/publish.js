@@ -1,26 +1,33 @@
 const { chunk, isEmpty } = require('lodash');
 const { cache } = require('../repository/cache');
 const { getCacheKey, sendMessageToClient } = require('../utils');
-const { RESPONSE_CODE, PUBLICATION_CHUNK_SIZE, ERROR } = require('../utils/constant');
+const { RESPONSE, PUBLICATION_CHUNK_SIZE } = require('../utils/constant');
+const { logger } = require('../utils/logger');
 
 const publishToSubscribers = async ({ topic, data }) => {
   try {
     const key = getCacheKey(topic);
     const subscribers = await cache.smembersAsync(key);
 
-    if (isEmpty(subscribers)) return RESPONSE_CODE.SUCCESS;
+    if (isEmpty(subscribers)) return RESPONSE.SUCCESS;
 
     const batches = chunk(subscribers, PUBLICATION_CHUNK_SIZE);
-    const publishProminses = batches
+    const publishPromises = batches
       .map((batch) => batch.map((url) => sendMessageToClient({ url, data })));
 
-    await Promise.all(...publishProminses);
+    for (let batch = 0; batch < publishPromises.length; batch++) {
+      await Promise.all(publishPromises[batch]);
+    }
 
-    return RESPONSE_CODE.SUCCESS;
+    return RESPONSE.SUCCESS;
   } catch (error) {
+    const detail = `Message to some subscribers failed! Reason: ${error.message}`;
+    
+    logger.error(detail);
+
     return {
-      ...RESPONSE_CODE.FAILURE,
-      detail: error,
+      ...RESPONSE.FAILURE,
+      detail,
     };
   }
 };

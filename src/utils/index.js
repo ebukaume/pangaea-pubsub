@@ -3,17 +3,13 @@ const { logger } = require('./logger');
 
 const getCacheKey = (suffix) => `subscribers-for-${suffix}`;
 
-const sendMessageToClient = async ({ url, data }) => {
-  try {
-    await axios({
-      method: 'POST',
-      url,
-      data,
-    });
-  } catch (err) {
-    logger.error(`Request to "${url}" failed! Reason: ${err.message}`);
-  }
-};
+const sendMessageToClient = async ({ url, data }) => (
+  axios({
+    method: 'POST',
+    url,
+    data,
+  })
+);
 
 const strictTypeOf = (value) => Object.prototype.toString.call(value).slice(8, -1);
 

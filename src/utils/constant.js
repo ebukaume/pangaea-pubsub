@@ -5,7 +5,7 @@ const ERROR = {
   NO_SUBSCRIBER: 'NO SUBSCRIBER!',
 };
 
-const RESPONSE_CODE = {
+const RESPONSE = {
   FAILURE: {
     code: 0,
     message: 'Failure',
@@ -20,6 +20,6 @@ const PUBLICATION_CHUNK_SIZE = 10;
 
 module.exports = {
   ERROR,
-  RESPONSE_CODE,
+  RESPONSE,
   PUBLICATION_CHUNK_SIZE,
 };
