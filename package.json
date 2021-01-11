@@ -24,7 +24,6 @@
     "helmet": "^3.21.2",
     "joi": "^17.3.0",
     "lodash": "^4.17.20",
-    "mongoose": "^5.9.22",
     "morgan": "^1.10.0",
     "redis": "^3.0.2",
     "swagger-ui-express": "^4.1.4",

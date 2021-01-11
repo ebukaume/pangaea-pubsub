@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const { bindRoutes } = require('./routes');
 const { logger } = require('./utils/logger');
 
@@ -12,7 +11,6 @@ const startServer = async (app) => {
   });
 
   process.on('SIGINT', () => {
-    mongoose.connection.close();
     server.close();
     logger.info('Successfully graciously shutdown the server!');
     process.exit(0);
