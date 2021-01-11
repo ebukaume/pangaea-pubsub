@@ -71,6 +71,7 @@ Request body
     "lat": 34.060660,
   }
 }
+
 Expected response
 {
   "code": 1,
