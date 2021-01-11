@@ -11,7 +11,7 @@ const sendMessageToClient = async ({ url, data }) => {
       data,
     });
   } catch (err) {
-    logger.error(err);
+    logger.error(`Request to "${url}" failed! Reason: ${err.message}`);
   }
 };
 

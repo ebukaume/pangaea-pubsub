@@ -63,5 +63,8 @@ Request body
 }
 ```
 
+### Quick Demo
+Start the server by running `npm start`, then run the demo script: `./demo.sh`
+
 ### Documentation
 GET `/api/v1/docs`
