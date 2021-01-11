@@ -58,6 +58,7 @@ Expected response
 Side effects:
 The systems keeps a record of the url (subscriber) for the specified topic
 ```
+
 2. To publish
 > POST `http://127.0.0.1/api/v1/publish/:topic`
 ```
@@ -70,7 +71,6 @@ Request body
     "lat": 34.060660,
   }
 }
-```
 Expected response
 {
   "code": 1,
@@ -79,6 +79,7 @@ Expected response
 
 Side effects:
 The system makes a post request, with the payload recieved on the publish endpoint, to all the subscribers
+```
 
 ### Quick Demo
 Start the server by running `npm start`, then run the demo script: `./demo.sh`
